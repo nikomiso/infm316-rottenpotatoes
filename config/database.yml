@@ -19,3 +19,6 @@ test: &test
 production:
   <<: *default
   database: my_database_production
+
+cucumber:
+  <<: *test
