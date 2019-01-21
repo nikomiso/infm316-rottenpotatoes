@@ -41,7 +41,7 @@ end
   
   def create
     params.require(:movie)
-    permitted = params[:movie].permit(:title,:rating,:release_date)
+    permitted = params[:movie].permit(:title, :rating, :description, :release_date, :director)
     @movie = Movie.new(permitted)
     if @movie.save
       flash[:notice] = "#{@movie.title} was successfully created."

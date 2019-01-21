@@ -6,15 +6,9 @@ Given /the following movies exist/ do |movies_table|
   end
 end
  
-#Then /(.*) seed movies should exist/ do | n_seeds |
-#  assert Movie.count == n_seeds.to_i
-#end
-
 Then /(.*) seed movies should exist/ do | n_seeds |
-  expect(Movie.count).to eq(n_seeds.to_i)
+  assert Movie.count == n_seeds.to_i
 end
-
-
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # use String#split to split up the rating_list, then
@@ -30,14 +24,14 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-
-
-#Then /I should see all the movies/ do
-#  rows = page.all('#movies tr').size - 1
-#  assert rows == Movie.count()
-#end
-
 Then /I should see all the movies/ do
   rows = page.all('#movies tr').size - 1
-  expect(rows).to eq(Movie.count())
+  assert rows == Movie.count()
+end
+
+Given(/^the following movies exist:$/) do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  table.hashes.each do |movie|
+      Movie.create!(movie)
+  end
 end
