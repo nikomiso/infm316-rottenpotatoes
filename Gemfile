@@ -3,6 +3,17 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.3'
 
+group :development, :test do
+  # make sure sqlite3 gem ONLY occurs inside development & test groups
+  # !!!!! make sure that you delete the sqlite3 gem from the general gems outside the development and test groups
+  gem 'sqlite3' # use SQLite only in development and testing
+end
+group :production do
+  # make sure the following gems are in your production group:
+  gem 'pg'              # use PostgreSQL in production (Heroku)
+end
+
+
 #use Haml for templates 
 gem 'haml'
 
